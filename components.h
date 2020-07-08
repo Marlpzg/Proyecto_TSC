@@ -166,6 +166,31 @@ void calculatePhi(Matrix &C, mesh m, int i){
 
 }
 
+void calculateFilling(Matrix &A){
+    zeroes(A,4);
+    
+    A.at(0).at(0) = getRandom();
+    A.at(0).at(1) = getRandom();
+    A.at(0).at(2) = getRandom();
+    A.at(0).at(3) = getRandom();
+
+    A.at(1).at(0) = getRandom();
+    A.at(1).at(1) = getRandom();
+    A.at(1).at(2) = getRandom();
+    A.at(1).at(3) = getRandom();
+
+    A.at(2).at(0) = getRandom();
+    A.at(2).at(1) = getRandom();
+    A.at(2).at(2) = getRandom();
+    A.at(2).at(3) = getRandom();
+
+    A.at(3).at(0) = getRandom();
+    A.at(3).at(1) = getRandom();
+    A.at(3).at(2) = getRandom();
+    A.at(3).at(3) = getRandom();
+
+}
+
 float calculateLocalJ(int i,mesh m){
     Matrix matrix;
     Vector row1, row2, row3;
@@ -194,13 +219,15 @@ float calculateLocalJ(int i,mesh m){
 Matrix createLocalM(int e,mesh &m){
     Matrix matrixB,matrixC,matrixK,matrixL;
     float swr,J,Determinant;
-    Matrix lambda_matrix, mu_matrix, omega_matrix, phi_matrix, Alpha, Beta, Alpha_t,Beta_t;
+    Matrix lambda_matrix, mu_matrix, omega_matrix, phi_matrix, Alpha, Beta, Alpha_t,Beta_t, Filling;
 
     calculateAlpha(e,Alpha,m);
     calculateBeta(Beta);
 
     transpose(Alpha,Alpha_t);
     transpose(Beta,Beta_t);
+
+    calculateFilling(Filling);
 
     Determinant = calculateLocalD(e,m);
     J = calculateLocalJ(e,m);
@@ -243,7 +270,7 @@ Matrix createLocalM(int e,mesh &m){
     ubicarSubMatriz(M,0,3,0,3, sumMatrix(matrixB,matrixC,4,4));
     ubicarSubMatriz(M,0,3,4,7,matrixK);
     ubicarSubMatriz(M,4,7,4,7,matrixL);
-    ubicarSubMatriz(M,4,7,0,3,matrixL);
+    ubicarSubMatriz(M,4,7,0,3,Filling);
 
     return M;
 }

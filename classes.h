@@ -1,7 +1,7 @@
 enum lines {NOLINE,SINGLELINE,DOUBLELINE};
 enum modes {NOMODE,INT_FLOAT,INT_FLOAT_FLOAT_FLOAT,INT_INT_INT_INT_INT};
 enum parameters {SHOWERS_RATIO};
-enum sizes {NODES,ELEMENTS,DIRICHLET,NEUMANN};
+enum sizes {NODES,ELEMENTS,DIRICHLET};
 enum coords {EQUIS,YE,ZETA};
 
 class item{
@@ -176,6 +176,6 @@ class mesh{
             return element_list[i];
         }
         condition getCondition(int i, int type){
-            return dirichlet_list[i];
+            return dirichlet_list[i];  
         }
 };

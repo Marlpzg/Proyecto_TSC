@@ -23,13 +23,6 @@ void applyDirichlet(mesh &m,Matrix &K,Vector &b){
     }
 }
 
-void applyNeumann(mesh &m,Vector &b){
-    for(int i=0;i<m.getSize(NEUMANN);i++){
-        condition c = m.getCondition(i,NEUMANN);
-        b.at(c.getNode1()-1) += c.getValue();
-    }
-}
-
 void calculate(Matrix &K, Vector &b, Vector &T){
     Matrix Kinv;
     cout << "Calculo de inversa...\n";

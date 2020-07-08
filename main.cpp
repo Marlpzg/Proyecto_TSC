@@ -19,9 +19,8 @@ int main(int argc, char *argv[])
     Vector b;
     Vector T;
 
-    cout << "IMPLEMENTACI"<<char(224)<<"N DEL M"<<char(144)<<"TODO DE LOS ELEMENTOS FINITOS\n"
-         << "\t- ECUACIONES DE NAVIER-STOKES\n" << "\t- 3 DIMENSIONES\n"
-         << "\t- FUNCIONES DE FORMA LINEALES\n" << "\t- PESOS DE GALERKIN\n"
+    cout << "IMPLEMENTACION DEL METODO DE LOS ELEMENTOS FINITOS\n"
+         << "ECUACIONES DE MARIO LOPEZ - 00046317\n"
          << "*********************************************************************************\n\n";
 
     mesh m;
@@ -35,7 +34,7 @@ int main(int argc, char *argv[])
     
     applyDirichlet(m,K,b);
     
-    cout << "K Global: " << endl;
+    cout << "M Global: " << endl;
     showMatrix(K);
     cout << endl;
 

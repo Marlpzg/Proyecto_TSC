@@ -1,6 +1,7 @@
 #include <vector>
 #include "math.h"
 #include "stdlib.h"
+#include <random>
 
 using namespace std;
 
@@ -38,6 +39,13 @@ void copyMatrix(Matrix A, Matrix &copy){
     for(int i=0;i<A.size();i++)
         for(int j=0;j<A.at(0).size();j++)
             copy.at(i).at(j) = A.at(i).at(j);
+}
+
+float getRandom(){
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+    return dis(gen);
 }
 
 float calculateMember(int i,int j,int r,Matrix A,Matrix B){

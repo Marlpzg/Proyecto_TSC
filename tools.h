@@ -133,6 +133,7 @@ int *createNonDirichletIndices(int nn,int nd,int *dirich_indices){
 }
 
 void writeResults(mesh m,Vector T,char *filename){
+
     char outputfilename[150];
 
     int nn = m.getSize(NODES);
@@ -147,35 +148,27 @@ void writeResults(mesh m,Vector T,char *filename){
 
     file << "GiD Post Results File 1.0\n";
 
-    file << "Result \"Velocity\" \"Load Case 1\" 1 Vector OnNodes\nComponentNames \"u\" \"v\" \"w\"\nValues\n";
+    file << "Result \"Anime\" \"Load Case 1\" 1 Scalar OnNodes\nComponentNames \"A\"\nValues\n";
 
     for(int i=0;i<nn;i++){
         int d_index = getIndex(i+1,nd,dirich_indices);
-        if(d_index != -1)
-            file << i+1 << " " << dirich[d_index].getValue() << " ";
-        else{
-            int T_index = getIndex(i+1,4*nn-nd,non_dirich_indices);
-            file << i+1 << " " << T.at(T_index) << " ";
-        }
-        d_index = getIndex(i+1+nn,nd,dirich_indices);
-        if(d_index != -1)
-            file << dirich[d_index].getValue() << "\n";
-        else{
-            int T_index = getIndex(i+1+nn,4*nn-nd,non_dirich_indices);
-            file << T.at(T_index) << "\n";
+        if(d_index != -1){
+            file << i+1 << " " << dirich[d_index].getValue() << "\n";
+        }else{
+            int T_index = getIndex(i+1,2*nn-nd,non_dirich_indices);
+            file << i+1 << " " << T.at(T_index) << "\n";
         }
     }
-
+    
     file << "End values\n";
-
-    file << "\nResult \"Pressure\" \"Load Case 1\" 1 Scalar OnNodes\nComponentNames \"p\"\nValues\n";
+    file << "\nResult \"Girls\" \"Load Case 1\" 1 Scalar OnNodes\nComponentNames \"G\"\nValues\n";
 
     for(int i=0;i<nn;i++){
-        int d_index = getIndex(i+1+2*nn,nd,dirich_indices);
+        int d_index = getIndex(i+1+nn,nd,dirich_indices);
         if(d_index != -1)
             file << i+1 << " " << dirich[d_index].getValue() << "\n";
         else{
-            int T_index = getIndex(i+1+2*nn,4*nn-nd,non_dirich_indices);
+            int T_index = getIndex(i+1+nn,2*nn-nd,non_dirich_indices);
             file << i+1 << " " << T.at(T_index) << "\n";
         }
     }
@@ -183,4 +176,5 @@ void writeResults(mesh m,Vector T,char *filename){
     file << "End values\n";
 
     file.close();
+    
 }

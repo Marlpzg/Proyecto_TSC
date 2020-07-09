@@ -122,9 +122,9 @@ int getIndex(int v, int s, Vector vec){
 }
 
 int *createNonDirichletIndices(int nn,int nd,int *dirich_indices){
-    int *ndi = new int[4*nn-nd];
+    int *ndi = new int[2*nn-nd];
     int pos = 0;
-    for(int i=1;i<=4*nn;i++)
+    for(int i=1;i<=2*nn;i++)
         if(!findIndex(i,nd,dirich_indices)){
             ndi[pos] = i;
             pos++;
